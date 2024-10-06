@@ -36,6 +36,4 @@ process.on('exit',()=>{
             log(`Error : ${error.message}`)
         }
     }
-    
-    
 });
