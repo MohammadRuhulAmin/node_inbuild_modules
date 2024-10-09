@@ -18,7 +18,8 @@ class Server {
         if (req.url === '/go') {
             // Use run to create a new context with reqId
             this.asyncLocalStorage.run({ requestId: this.reqId++ }, () => {
-                this.asyncLocalStorage.bind(this.process)
+                this.asyncLocalStorage.bind(this.process) // without invoking the the function directly 
+                // i am just bind process function 
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end('Request processed\n'); // End the response
             });
