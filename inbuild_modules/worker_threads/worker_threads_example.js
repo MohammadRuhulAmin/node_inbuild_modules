@@ -1,5 +1,6 @@
 import http from "node:http"
 import worker_threads from "node:worker_threads"
+import { Worker } from "node:worker_threads";
 const port = 8000
 
 const server = http.createServer((req,res)=>{
