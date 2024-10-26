@@ -8,10 +8,13 @@ const server = http.createServer((req,res)=>{
         res.end()
     }
     else if(req.url == '/blocking'){
-        let result = 0;
-        for(let i = 0;i<10000000000;i++)result++;
-        res.write(`This page is blocking ${result}`)
-        res.end()
+        const worker = new Worker("./task/task_a.js");
+        worker.on("message",(data)=>{
+            res.write(`This bloking site: ${data}`)
+        });
+        worker.on("error",(err)=>{
+            res.write("Error Occured",err)
+        })
     }
     else{
         res.writeHead(404,{
