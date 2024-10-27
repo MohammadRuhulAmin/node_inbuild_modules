@@ -1,18 +1,18 @@
-import {
-    Worker, isMainThread, setEnvironmentData, getEnvironmentData
-} from "node:worker_threads";
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-/** Sharing data between main thread and worker thread! */
+import {Worker, isMainThread} from "node:worker_threads"
 
-if (isMainThread) {
-    // Set shared environment data with the key 'Hellow'
-    setEnvironmentData("Hellow", "World!");
-    // Create a new worker thread
-    //new Worker(__filename)
-    console.log("Main Thread is running!")
+if(isMainThread){
+    console.log("Running in Main thread")
+    const workerThread = new Worker('./task.js')
+    workerThread.postMessage("From Parent")
+    workerThread.on('message',(data)=>{
+        console.log(data)
+    });
+    workerThread.on('error',(data)=>{
+        console.log(data)
+    });
+    workerThread.on('exit',(data)=>{
+        console.log("Exit from the tread")
+    });
+    
 
-} else {
-    // Get the environment data using the correct key 'Hellow'
-    console.log(getEnvironmentData("Hellow"));  // Prints 'World!'
-}
+}else console.log("Not in the main Thread!")
