@@ -5,14 +5,17 @@
  *  Buffers are particularly useful for handling 
  * streams of data from I/O operations, 
  * such as when reading from a file or receiving data over a network.
-=======
+
 /***
  * A buffer in Node.js is a temporary memory storage area 
  * designed to handle raw binary data. 
  * Buffers are particularly useful for handling streams of data from I/O operations,
  *  such as when reading from a file or receiving data over a network.
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> abc910b5f3dde444f3005a1d41c3985520aa2b1d
 Here’s why buffers are important and how they work:
 Key Points:
 
@@ -35,17 +38,17 @@ Common Use Cases for Buffers:
 
 import {Buffer} from "node:buffer"
 // create buffer of 100 bytes,with initializing default 0 value
-const buf1 = Buffer.alloc(100);
-buf1.write("Hellow world!")
+const bufx1 = Buffer.alloc(100);
+bufx1.write("Hellow world!")
 console.log(buf1.toString())
 
-const buf2 = Buffer.alloc(10,5);
-console.log(buf2)
+const bufx2 = Buffer.alloc(10,5);
+console.log(bufx2)
 
 //const buf3 = Buffer.allocUnsafe()
 
 const buf4 = Buffer.from([1,2,3]) // it will create a 3 bytes of buffer
-const buf5 = Buffer.from([1,2,3,4,5]) // it will create a 5 bytes of buffer
+const bufx5 = Buffer.from([1,2,3,4,5]) // it will create a 5 bytes of buffer
 buf5.write("Hi this is a good string")
 console.log(buf4,buf5.toString())
 /*
@@ -59,12 +62,12 @@ Common Use Cases for Buffers:
 
 Example:
 
-js
+*/
 
 const buf = Buffer.alloc(5);  // Creates a buffer of 5 bytes initialized to zero
 buf.write('hello');           // Writes the string 'hello' to the buffer
 console.log(buf.toString());  // Outputs: 'hello'
-
+/*
 In this example:
 
     The buffer is allocated with 5 bytes of space.
@@ -77,7 +80,7 @@ Buffers are fundamental for managing binary data in an efficient way in Node.js.
 
 import {Buffer} from 'node:buffer';
 
-const buf = Buffer.from('hellow world','utf8')
+const bufc = Buffer.from('hellow world','utf8')
 const buf1 = Buffer.alloc(10,1);
 const buf2 = Buffer.from([1,2,3,4,5]) // allocating array of 5 bytes 
 buf2.write("Hi this is ruhul amin")
@@ -132,4 +135,4 @@ const bufferx = Buffer.from([1,2,3,4,5])
 for(const b of bufferx){
     console.log(b)
 }
->>>>>>> 2dfe7eeed533c465207dfe07217e16810bab979e
+
