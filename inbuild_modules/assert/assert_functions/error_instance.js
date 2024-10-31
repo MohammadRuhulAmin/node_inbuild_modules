@@ -15,4 +15,6 @@ assert.throws(()=>{
 });
 
 
-// assert.throws() is used to check that an error is thrown, but it does not print the error because it's designed to catch it for validation.
+// assert.throws() is used to check that an error is thrown, 
+//but it does not print the error because it's designed to catch it for validation.
+

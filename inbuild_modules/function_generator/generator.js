@@ -1,4 +1,6 @@
 
+// function generator
+
 function* greeting(name){
     yield "Hi!"
     yield "How are you?"

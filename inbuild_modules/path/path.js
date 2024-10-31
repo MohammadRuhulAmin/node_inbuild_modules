@@ -1,6 +1,7 @@
 import path from "node:path"
 
 
+
 /**
  * POSIX = PORTABLE OPERATING SYSTEM INTERFACE
  */
@@ -42,3 +43,5 @@ console.log(path.relative('C:\\orandea\\test\\aaa', '\\orandea\\impl\\bbb'));
 
 /**The path.sep property in Node.js provides the platform-specific path segment separator: */
 console.log(path.sep)
+
+

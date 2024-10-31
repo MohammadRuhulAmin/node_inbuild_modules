@@ -12,6 +12,7 @@ console.log("Available parallel threads")
 
 const parallelism = os.availableParallelism();
 
+/**In Node.js, parallelism typically refers to the number of tasks or threads the system can execute simultaneously. */
 console.log(`Available parallelism: ${parallelism}`);
 
 console.log(os.cpus())
