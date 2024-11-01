@@ -11,5 +11,6 @@ for (let i = 0; i < 20; i++) {
   });
 }
 
+console.log("Max Listener: ",emitter.getMaxListeners())
 // Emitting 'myEvent' will print the warning due to exceeding the limit
 emitter.emit('myEvent'); 
