@@ -43,7 +43,7 @@ server.listen(3000, '127.0.0.1', () => {
 let inputBuffer = '';
 
 rl.on('line', (line) => {
-    inputBuffer += "called : "+line + '\n';
+    inputBuffer += line + '\n';
     const clientSocket = clients.get(socketId);
     clientSocket.write(inputBuffer);
     inputBuffer = ''; // Clear the buffer for the next input
