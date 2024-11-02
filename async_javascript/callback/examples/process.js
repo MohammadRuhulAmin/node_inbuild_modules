@@ -13,6 +13,7 @@ const process3 = (customer)=>{
     console.log(`process 3 execution for ${customer}`)
 }
 
+/** callback hell */
 process1('customer 1',(customer)=>{
     process2(customer,()=>{
         process3(customer)
