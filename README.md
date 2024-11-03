@@ -1,7 +1,8 @@
 # Node.js
 
+# Module: "node:http"
 
-## What is HTTP ? ##
+## HTTP: Hypertext transfer protocol ##
 HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documents such as HTML, videos, audios, interactive contents etc. HTTP is designed to be stateless meaning each request from a client to server is independent. It was designed for communication between web browsers and web servers, but it can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more. Client and servers communicate by exchanging individual messages (as opposed to a stream of data) The messages sent by the client are called requests and the messeges sent by the server as an answers are called responses. 
 
 - HTTP is STATELESS: there are no link between two requests being successively carried out on the same connection. 
@@ -52,3 +53,84 @@ HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documen
     ```
 
     - step4: Close or reuse the connection for further requests.
+
+
+# HTTP Headers:
+HTTP headers let the client and the server pass additional information with an HTTP request or response. An HTTP header consists of its case-insensitive name followed by a colon (:), then by its value.Headers can be grouped according to their contexts:
+1. Request Headers:Request headers are sent by the client to the server as part of an HTTP request. They provide additional information about the request being made, including client preferences and capabilities.
+```javascript
+    GET /path/resource HTTP/1.1
+    Host: www.example.com
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+    Accept-Language: en-US,en;q=0.5
+    Accept-Encoding: gzip, deflate, br
+    Connection: keep-alive
+
+    /** lets build this header request using node.js */
+    import http from "node:http"
+    const options = {
+        hostname:'www.google.com', 
+        port:80,
+        path:'/path/resource',
+        method:'GET',
+        headers:{
+            'User-Agent': 'Node.js/12.18.3',
+            'Accept': 'text/html',
+            'Accept-Language':'en-US,en;q=0.5'
+        }
+    }
+    const req = http.request(options, (res) => {
+    console.log(`STATUS: ${res.statusCode}`);
+
+    // Print the response headers
+    console.log('Response Headers:', res.headers);
+
+    // Handle the response data
+    res.on('data', (chunk) => {
+        console.log(`BODY: ${chunk}`);
+    });
+    });
+
+    // Handle errors
+    req.on('error', (error) => {
+    console.error(`Problem with request: ${error.message}`);
+    });
+
+    // End the request
+    req.end();
+
+
+```
+Breakdown of the Request Headers
+
+- GET /path/resource HTTP/1.1
+        This is the request line, indicating that the client wants to perform a GET request to the specified resource (/path/resource) using HTTP version 1.1.
+
+- Host: www.example.com
+        Specifies the domain name of the server (and potentially the port number) to which the request is being sent. This header is mandatory in HTTP/1.1 requests.
+
+- User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36
+        Provides information about the client software (browser) making the request, including the operating system, browser name, and version. This helps servers tailor responses based on the client's capabilities.
+
+- Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,/;q=0.8
+        Indicates the media types that the client can accept in the response. The client prefers HTML and XML formats, with q values representing the relative preference for each type.
+
+- Accept-Language: en-US,en;q=0.5
+        Specifies the preferred language(s) for the response. In this example, the client prefers U.S. English, but it can accept general English as well.
+
+- Accept-Encoding: gzip, deflate, br
+        Indicates the encoding methods that the client supports for the response body. The client can handle responses compressed using gzip, deflate, or Brotli (br) compression.
+
+- Connection: keep-alive
+        Informs the server that the client wishes to keep the connection open after the request has been completed. This allows for additional requests to be sent over the same connection, improving performance.
+
+
+2. Response Headers:
+3. Representation Headers:
+4. Payload Headers:
+5. End-to-end Headers:
+6. Hop-by-hop Headers:
+
+
+
