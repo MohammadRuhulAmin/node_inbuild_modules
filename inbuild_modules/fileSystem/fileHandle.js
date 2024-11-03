@@ -53,8 +53,9 @@ const object = undefined
 console.log(object?.about)
 */
 
+
 try{
-    const m1 = new manageFile('./tmp/file1')
+    const m1 = new manageFile('./tmp/file01')
     m1.appendMode()
     m1.readMode()
 }catch(err){
