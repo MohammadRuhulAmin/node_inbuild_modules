@@ -1,10 +1,7 @@
 # Node.js
 
-- HTTP
-    - Client - Server Model
-        - 
 
-__What is HTTP ?__ 
+## What is HTTP ? ##
 HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documents such as HTML, videos, audios, interactive contents etc. HTTP is designed to be stateless meaning each request from a client to server is independent. It was designed for communication between web browsers and web servers, but it can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more. Client and servers communicate by exchanging individual messages (as opposed to a stream of data) The messages sent by the client are called requests and the messeges sent by the server as an answers are called responses. 
 
 - HTTP is STATELESS: there are no link between two requests being successively carried out on the same connection. 
