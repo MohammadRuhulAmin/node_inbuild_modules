@@ -36,3 +36,19 @@ HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documen
     
     `Accept-Language: fr`
         Accept-Language: This header indicates the preferred language for the response. In this case, "fr" specifies that the client prefers the response to be in French. This allows the server to provide localized content if available, enhancing the user experience.
+
+    - step3: Read the response sent by the server, such as:
+    ```javascript
+    HTTP/1.1 200 OK
+    Date: Sat, 09 Oct 2010 14:28:02 GMT
+    Server: Apache
+    Last-Modified: Tue, 01 Dec 2009 20:18:22 GMT
+    ETag: "51142bc1-7449-479b075b2891b"
+    Accept-Ranges: bytes
+    Content-Length: 29769
+    Content-Type: text/html
+
+    <!doctype html>… (here come the 29769 bytes of the requested web page)
+    ```
+
+    - step4: Close or reuse the connection for further requests.
