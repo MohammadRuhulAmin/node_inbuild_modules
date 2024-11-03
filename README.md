@@ -70,7 +70,7 @@ HTTP headers let the client and the server pass additional information with an H
     /** lets build this header request using node.js */
     import http from "node:http"
     const options = {
-        hostname:'www.google.com', 
+        hostname:'www.example.com', 
         port:80,
         path:'/path/resource',
         method:'GET',
@@ -124,6 +124,139 @@ Breakdown of the Request Headers
 
 - Connection: keep-alive
         Informs the server that the client wishes to keep the connection open after the request has been completed. This allows for additional requests to be sent over the same connection, improving performance.
+
+
+Using Basic Authentication:
+Basic Authentication sends the username and password encoded in base64 as part of the Authorization header.
+```javascript
+/* Authorization header using Basic Authentication */
+POST /api/users HTTP/1.1
+Host: www.example.com
+User-Agent: MyApp/1.0.0 (Windows NT 10.0; Win64; x64)
+Accept: application/json
+Content-Type: application/json
+Content-Length: 59
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=  // base64 encoded "username:password"
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com" // The request body is where you include the data that you want to send to the server, such as JSON objects, form data, or other types of payloads. 
+}
+
+
+/* Lets implement this using node.js */
+
+```
+Implement a Basic Authentication Post Request:
+
+```javascript
+const http = require('http');
+
+// Data to send in the POST request
+const postData = JSON.stringify({
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+});
+
+// Basic Auth credentials
+const username = 'username';
+const password = 'password';
+const auth = 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64');
+const options = {
+  hostname: 'www.example.com',
+  port: 80,
+  path: '/api/users',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Length': Buffer.byteLength(postData),
+    'Authorization': auth,
+  },
+};
+const req = http.request(options, (res) => {
+  console.log(`STATUS: ${res.statusCode}`);
+  res.on('data', (chunk) => {
+    console.log(`BODY: ${chunk}`);
+  });
+});
+
+req.on('error', (error) => {
+  console.error(`Problem with request: ${error.message}`);
+});
+req.write(postData);
+req.end();
+```
+
+
+using  Bearer Token Authentication
+```javascript
+POST /api/users HTTP/1.1
+Host: www.example.com
+User-Agent: MyApp/1.0.0 (Windows NT 10.0; Win64; x64)
+Accept: application/json
+Content-Type: application/json
+Content-Length: 59
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+Authorization: Bearer your_access_token_here  // your_access_token_here is the actual token
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+
+
+
+```
+
+
+```javascript
+const http = require('http');
+
+// Data to send in the POST request
+const postData = JSON.stringify({
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+});
+
+// Bearer Token : The request which can bear a token is called bearer token.
+
+/*  */
+const token = 'your_access_token_here';
+
+// Options for the request
+const options = {
+  hostname: 'www.example.com',
+  port: 80,
+  path: '/api/users',
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Length': Buffer.byteLength(postData),
+    'Authorization': `Bearer ${token}`,
+  },
+};
+
+// Making the POST request
+const req = http.request(options, (res) => {
+  console.log(`STATUS: ${res.statusCode}`);
+  res.on('data', (chunk) => {
+    console.log(`BODY: ${chunk}`);
+  });
+});
+
+req.on('error', (error) => {
+  console.error(`Problem with request: ${error.message}`);
+});
+req.write(postData);
+req.end();
+
+
+```
+
+
 
 
 2. Response Headers:
