@@ -22,4 +22,17 @@ HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documen
             Host: developer.mozilla.org
             Accept-Language: fr
     ```
+    Lets breakdown request.  
+    
+    
+    Request Line: `GET / HTTP/1.1` 
+        GET: This is the HTTP method used in the request. In this case, "GET" indicates that the client is requesting data from the server. The GET method is used to retrieve resources (like HTML documents, images, etc.) without affecting the state of the resource on the server.
 
+        /: This is the requested resource's path. The "/" indicates that the client is requesting the root of the server, which is usually the homepage or the main entry point of the website.
+
+        HTTP/1.1: This indicates the HTTP version being used for the request. In this case, it is HTTP/1.1, which is a widely used version of the protocol that includes features such as persistent connections and chunked transfer encoding.
+    Headers `Host: developer.mozilla.org`
+        This header specifies the domain name of the server to which the request is being sent. In this example, the request is directed to developer.mozilla.org, which is the host for the Mozilla Developer Network website. The Host header is mandatory in HTTP/1.1 requests and is crucial for virtual hosting, where multiple domains are served from a single IP address.
+    
+    `Accept-Language: fr`
+        Accept-Language: This header indicates the preferred language for the response. In this case, "fr" specifies that the client prefers the response to be in French. This allows the server to provide localized content if available, enhancing the user experience.
