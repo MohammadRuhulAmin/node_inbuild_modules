@@ -13,4 +13,13 @@ HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documen
 
     In each of these requests, HTTP does not inherently "remember" the user. It’s the session token sent in the cookies that provides continuity across the stateless HTTP protocol, allowing a session to persist.
 
+- HTTP flow:
+    - step1: open a TCP connection: The TCP connection is used to send a request, or several, and receive an answer.
+    - step2: Send an HTTP message: HTTP messages (before HTTP/2) are human-readable. With HTTP/2, these simple messages are encapsulated in frames, making them impossible to read directly, but the principle remains the same. 
+    For example: 
+    ```python
+            GET / HTTP/1.1   
+            Host: developer.mozilla.org
+            Accept-Language: fr
+    ```
 
