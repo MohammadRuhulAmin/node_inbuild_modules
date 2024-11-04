@@ -320,6 +320,10 @@ Buffering and streaming are two methods for handling data transfer, particularly
 
 In Node.js, streaming is commonly preferred for tasks like serving files over HTTP, as it provides a more scalable solution compared to buffering the entire file in memory.
 
+- for more details about streaming:
+(Streaming in Node.js)[https://www.scaler.com/topics/nodejs/streams-in-nodejs/]
+
+
 2. Response Headers:
 3. Representation Headers:
 4. Payload Headers:
