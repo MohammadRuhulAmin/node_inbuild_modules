@@ -256,8 +256,69 @@ req.end();
 
 ```
 
+Node.js uses streams, which are instances of the Stream class, to handle data in chunks rather than as a whole. This is especially valuable when working with large amounts of data, as it enables processing each part of the data incrementally without holding everything in memory. Node.js streams support a pattern where data is read and written in small, manageable chunks, allowing users to respond to data as soon as it’s available.
 
+There are four main types of streams in Node.js:
 
+    Readable: Streams you can read data from (e.g., fs.createReadStream for file reading).
+    Writable: Streams you can write data to (e.g., fs.createWriteStream for writing to files).
+    Duplex: Streams that are both readable and writable (e.g., sockets).
+    Transform: Duplex streams that can modify or transform the data as it is read or written (e.g., zlib compression streams).
+
+Streaming HTTP Requests and Responses
+
+In the context of HTTP, streaming in Node.js allows us to process data in real-time, chunk by chunk, as it arrives in an HTTP request or response. This is commonly used in scenarios such as file uploads or downloads, where loading the entire file content into memory would be impractical. With Node.js, the HTTP request and response objects (http.IncomingMessage and http.ServerResponse) are both streams.
+
+Here’s how it works:
+
+    1. Stream Data from Requests: You can read incoming data in chunks without waiting for the entire request body to arrive. This is especially useful for uploading large files.
+
+    2. Stream Data to Responses: You can send data in chunks, which is efficient for serving large files or real-time data feeds like live video.
+
+Key Benefits of Streaming in Node.js
+
+    1. Memory Efficiency: Only small chunks of data are stored in memory at a time, which is optimal for large datasets.
+    2. Real-Time Data Processing: Data is available as soon as it is received, which is ideal for real-time applications.
+    3. Responsiveness: Streaming provides a faster response time, as data starts flowing to the client immediately instead of waiting for the entire processing to complete.
+
+This architecture enables applications to handle requests efficiently by streaming data rather than buffering it entirely, allowing Node.js to handle a large number of requests and responses with minimal memory overhead.
+
+### Buffering Vs Streaming
+
+Buffering and streaming are two methods for handling data transfer, particularly when dealing with large data sets, such as files, multimedia, or data over a network.
+
+### Buffering
+- **Definition**: Buffering involves collecting the entire dataset or a substantial portion of it in a temporary storage area (the buffer) before processing or transmitting the data.
+- **Process**: Data is fully or partially loaded into memory, and only when the buffer is filled or the data is fully available does it begin to be processed or delivered to the next stage.
+- **Example**: Video buffering is common on streaming platforms—before playing, it may load a few seconds or even the entire video (if the network is slow) to avoid interruptions.
+- **Advantages**:
+  - Ensures data continuity and prevents interruptions during processing.
+  - Useful for smaller files that fit easily in memory.
+- **Disadvantages**:
+  - Memory-intensive and inefficient for large files or high-concurrency environments.
+  - Delays processing until data is fully loaded into the buffer, causing potential lag.
+
+### Streaming
+- **Definition**: Streaming refers to processing data in real-time as it arrives, without waiting for the entire dataset to be available.
+- **Process**: Data is divided into smaller, manageable chunks that are processed immediately as they are received. This continues until the entire dataset is processed.
+- **Example**: When watching a live broadcast online, video data is streamed to the viewer's device in real-time, allowing the user to watch immediately without loading the entire video.
+- **Advantages**:
+  - Memory-efficient, as only small parts of data are in memory at any given time.
+  - Faster and more responsive for large datasets or high-traffic applications.
+- **Disadvantages**:
+  - May lead to interruptions if data flow is inconsistent, as each part is processed immediately.
+  - Requires a continuous data flow for smooth operation.
+
+### Summary of Differences
+
+| Aspect           | Buffering                             | Streaming                              |
+|------------------|--------------------------------------|----------------------------------------|
+| **Data Handling** | Collects entire or large parts of data in memory before processing | Processes data in small chunks as it arrives |
+| **Memory Usage** | High, especially with large datasets | Low, only holds chunks at a time      |
+| **Processing Speed** | Can be delayed until all data is loaded | Real-time processing as data arrives  |
+| **Applications** | Useful for smaller files or cases needing data continuity | Ideal for large files, live data, or high-concurrency applications |
+
+In Node.js, streaming is commonly preferred for tasks like serving files over HTTP, as it provides a more scalable solution compared to buffering the entire file in memory.
 
 2. Response Headers:
 3. Representation Headers:
