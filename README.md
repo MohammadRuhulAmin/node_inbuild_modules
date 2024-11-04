@@ -1,5 +1,5 @@
 # Node.js
-
+Node.js is a runtime environment that allows you to execute JavaScript on the Server side. It is built on V8 javaScript Engine, Event-Driven and Non-blocking, Single-Threated with Async Process.
 # Module: "node:http"
 
 ## HTTP: Hypertext transfer protocol ##
