@@ -19,5 +19,46 @@ myServer.addRoute("GET", "/fetch-data", (req, res) => {
     res.end(JSON.stringify({ message: "Fetch API CALLED! 2" }));
 });
 
+myServer.addRoute("GET","/socket-data",(req,res)=>{
+    
+    http.get(options,(response)=>{
+        let data = ''
+        response.on('data',(chunk)=>{
+            data += chunk
+        })
+        response.on('end',()=>{
+            console.log(data)
+            res.end(data)
+        })
+    }).on('socket',(socket)=>{
+        console.log('socket created for request')
+        socket.emit('agentRemove')
+    }).on('error',(err)=>{
+        console.error(err.message)
+    })
+})
+
+
+
+myServer.addRoute("GET", "/proxy-fetch", (req, res) => {
+    const options = {
+        hostname: "localhost",
+        port: PORT,
+        path: "/fetch-api",
+        method: "GET"
+    };
+
+    // Fetch data and send it as response
+    myServer.fetchData(options, (err, data) => {
+        if (err) {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "Internal Server Error" }));
+        } else {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(data);
+        }
+    });
+});
+
 // Start the server
 myServer.start();
