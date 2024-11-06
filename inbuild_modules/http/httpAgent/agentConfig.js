@@ -29,4 +29,32 @@ const agentOptions = {
     */
 }
 
+/** create the agent with the specified options  */
 const agent = new http.Agent(agentOptions)
+
+/**  We are using the agent in the specified options*/
+const options = {
+    hostname:'example.com',
+    port: 80,
+    path:'/',
+    method: 'GET',
+    agent:agent 
+}
+
+const req = http.request(options,(res)=>{
+    let data = ''
+    console.log(`status: ${res.statusCode}`)
+    res.setEncoding('utf-8')
+    res.on('data',(chunk)=>{
+        data+=chunk 
+    })
+    res.on('end',()=>{
+        console.log(data)
+        console.log(`No more data in response.`)
+    })
+    res.on('error',(e)=>{
+        console.error(`problem with the request ${e.message}`)
+    })
+})
+
+req.end()
