@@ -63,7 +63,6 @@ const req = http.request(options,(res)=>{
 })
 
 
-
 req.on('error',(err)=>{
     console.error(`Request error : ${err.message}`)
 })
@@ -75,6 +74,7 @@ req.on('socket',(socket)=>{
     socket.emit('agentRemove')
 
 })
+
 
 /* process.exit(0): Exits the program normally (successfully).*/
 /* process.exit(1): Exits the program with an error code (indicating something went wrong).*/
