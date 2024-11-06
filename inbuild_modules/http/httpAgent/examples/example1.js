@@ -9,7 +9,6 @@ const agentCred = {
     scheduling: 'lifo',
     timeout: 5000
 };
-
 // Options for the external HTTP request to example.com
 const options = {
     hostname: 'example.com',
@@ -18,7 +17,6 @@ const options = {
     path: '/',
     agent: new http.Agent(agentCred)
 };
-
 // Create the server
 const server = http.createServer((req, res) => {
     if (req.url === "/" && req.method === 'GET') {
