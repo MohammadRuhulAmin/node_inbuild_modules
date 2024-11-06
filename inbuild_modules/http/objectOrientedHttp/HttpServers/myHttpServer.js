@@ -39,7 +39,6 @@ class MyHttpServer {
                 console.error("Response object not provided. Cannot stream file.");
                 return;
             }
-
             // Ensure the filePath is valid
             if (!this.filePath) {
                 console.error("File path not provided.");
@@ -53,13 +52,9 @@ class MyHttpServer {
                 highWaterMark:50
             });
             res.writeHead(200, { 'Content-Type': 'text/plain' });
-
-
             readStream.on('data',  (chunk) => {
                 res.write(chunk)
             });
-            
-            
             readStream.on('end', () => {
                 res.end(); // End the response when the stream ends
                 console.log('Streaming complete');

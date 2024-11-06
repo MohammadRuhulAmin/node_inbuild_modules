@@ -38,9 +38,9 @@ const options = {
     port: 80,
     path:'/',
     method: 'GET',
-    agent:agent 
+    agent:agent /** if agent: false , that means there will be a new agent created for this one request */
 }
-
+/** create a http request */
 const req = http.request(options,(res)=>{
     let data = ''
     console.log(`status: ${res.statusCode}`)
@@ -51,10 +51,39 @@ const req = http.request(options,(res)=>{
     res.on('end',()=>{
         console.log(data)
         console.log(`No more data in response.`)
+        process.exit(1)
     })
     res.on('error',(e)=>{
         console.error(`problem with the request ${e.message}`)
+    }).on('socket',(socket)=>{
+        socket.emit('agentRemove')
+    }).on('error',(err)=>{
+        console.log(err.message)
     })
 })
+
+
+
+req.on('error',(err)=>{
+    console.error(`Request error : ${err.message}`)
+})
+
+req.on('socket',(socket)=>{
+    socket.on('error',(err)=>{
+        console.log(`socket error: ${err.message}`)
+    })
+    socket.emit('agentRemove')
+
+})
+
+/* process.exit(0): Exits the program normally (successfully).*/
+/* process.exit(1): Exits the program with an error code (indicating something went wrong).*/
+
+
+req.on('timeout',()=>{
+    console.log(`Request timed out`)
+    process.exit(1)
+})
+
 
 req.end()
