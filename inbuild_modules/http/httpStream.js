@@ -17,6 +17,7 @@ const server = http.createServer((req, res) => {
 
   // Set response headers and pipe the stream only if no errors occur
   res.writeHead(200, { 'Content-Type': 'text/plain' });
+
   readStream.pipe(res);
 });
 

@@ -49,7 +49,7 @@ class MyHttpServer {
 
             const readStream = fs.createReadStream(this.filePath, {
                 encoding:'utf-8',
-                highWaterMark:50
+                highWaterMark:10
             });
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             readStream.on('data',  (chunk) => {
