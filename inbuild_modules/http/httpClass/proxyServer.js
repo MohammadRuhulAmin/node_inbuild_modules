@@ -3,7 +3,9 @@ import { connect } from 'node:net';
 import { URL } from 'node:url';
 
 // Step 1: Create an HTTP tunneling proxy server
-const proxy = createServer((req, res) => {
+
+const proxy = createServer((req, res) => { /** req=> is an instance/object of http.IncomingMessage which is a readable stream */
+  /** res=> is an instance/object of http.ServerResponse which is a writable stream  */
   // Respond to the HTTP request with a 200 OK status and plain text message
   res.writeHead(200, { 'Content-Type': 'text/plain' });
   res.end('okay');
@@ -25,8 +27,8 @@ proxy.on('connect', (req, clientSocket, head) => {
     serverSocket.write(head);
 
     // Pipe data between the client socket and server socket
-    serverSocket.pipe(clientSocket);
-    clientSocket.pipe(serverSocket);
+    serverSocket.pipe(clientSocket); /** the connection from proxy server to the actual target server */
+    clientSocket.pipe(serverSocket); /** the connection from the client to proxy server */
   });
 });
 
@@ -44,7 +46,7 @@ proxy.listen(1337, '127.0.0.1', () => {
 
   // Send a CONNECT request to the proxy server
   const req = request(options);
-  req.end();
+  req.end(); /** no more request to send message in server */
 
   // Handle the 'connect' event once the proxy establishes a connection
   req.on('connect', (res, socket, head) => {
