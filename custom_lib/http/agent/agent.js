@@ -1,5 +1,5 @@
 import httpAgentManager from "./httpAgentManager.js"
-import HttpAgentManager from "./httpAgentManager.js"
+
 import {Agent} from "node:http"
 const agentCred = {
     keepAlive:true,
@@ -11,10 +11,10 @@ const agentCred = {
 }
 
 const options = {
-    host:'examplex.cm',
+    host:'jsonplaceholder.typicode.com',
     port:80,
     method:'GET',
-    path:'',
+    path:'/todos',
     agent: new Agent(agentCred)
 }
 

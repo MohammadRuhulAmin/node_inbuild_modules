@@ -22,4 +22,16 @@ class httpAgentManager{
     }
 }
 
-export default httpAgentManager
+export default httpAgentManager;
+
+
+/**
+ * use cases:
+ * 1. API consumption
+ * 2. Internal Microservice Communication
+ * 3. Middleware for Proxies
+ * 4. Custom Workflows
+ * 5. Error Handling and Debbuging
+ * 6. Flexible HTTP Configuration
+ * 
+ */
