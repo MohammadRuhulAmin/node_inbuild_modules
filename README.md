@@ -2,8 +2,8 @@
 Node.js is a runtime environment that allows you to execute JavaScript on the Server side. It is built on V8 javaScript Engine, Event-Driven and Non-blocking, Single-Threated with Async Process.
 # Module: "node:http"
 
-## HTTP: Hypertext transfer protocol ##
-HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documents such as HTML, videos, audios, interactive contents etc. HTTP is designed to be stateless meaning each request from a client to server is independent. It was designed for communication between web browsers and web servers, but it can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more. Client and servers communicate by exchanging individual messages (as opposed to a stream of data) The messages sent by the client are called requests and the messeges sent by the server as an answers are called responses. 
+## HTTP: Hypertext transfer protocol (CLIENT-SERVER PROTOCOL)  ## 
+HTTP stands for Hyper Text Transfer Protocol for transmitting hypermedia documents such as HTML, videos, audios, interactive contents etc.There are two types of HTTP messages (Request and Response). HTTP is designed to be stateless meaning each request from a client to server is independent. It was designed for communication between web browsers and web servers, but it can also be used for other purposes, such as machine-to-machine communication, programmatic access to APIs, and more. Client and servers communicate by exchanging individual messages (as opposed to a stream of data) The messages sent by the client are called requests and the messeges sent by the server as an answers are called responses. 
 
 - HTTP is STATELESS: there are no link between two requests being successively carried out on the same connection. 
 - HTTP is not SESSIONLESS:
@@ -323,6 +323,49 @@ In Node.js, streaming is commonly preferred for tasks like serving files over HT
 - for more details about streaming:
 (Streaming in Node.js)[https://www.scaler.com/topics/nodejs/streams-in-nodejs/]
 
+The difference between new net.createServer() and new http.createServer()
+
+In Node.js, net.createServer() and http.createServer() are two different methods used to create servers, but they operate at different levels of the networking stack and serve different purposes.
+
+The connectivity and responsibilities of `net.createServer()`:
+1. Purpose: Creates a generic TCP server.
+2. Use Case: Used for low-level networking tasks and handling raw TCP connections.
+3. Parameters: The callback receives a socket object, which represents the TCP connection between the server and a client.
+4. Protocol: Works at the TCP level, so it does not understand HTTP requests or responses directly.
+
+```javaScript
+const net = require('net');
+
+const server = net.createServer((socket) => {
+  console.log('Client connected');
+  socket.write('Hello from TCP server!');
+  socket.on('data', (data) => {
+    console.log('Received:', data.toString());
+  });
+});
+
+server.listen(3000, () => {
+  console.log('TCP server listening on port 3000');
+});
+
+```
+
+The connectivity and responsibility of `http.createServer()`:
+1. creates http servers
+2. Handle web requests and responses like GET, PUT, DELETE, POST
+
+```javascript
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello from HTTP server!');
+}).listen(3000, () => {
+  console.log('HTTP server listening on port 3000');
+});
+
+
+```
 
 2. Response Headers:
 3. Representation Headers:
