@@ -380,3 +380,4 @@ console.log(http.METHODS)
 1. ACL (Access Control List): is a set of rules used to control access to resources by specifing which users or
 system processes have permissions to access certain objects.
 2. BIND: The BIND method is a less commonly used HTTP method that is part of the WebDAV (Web Distributed Authoring and Versioning) protocol. The BIND method is used to create a new binding to an existing resource, similar to a symbolic link in a file system, allowing the same resource to be accessed at different URLs.
+3. CONNECT: is used to establish a tunnel between a client and server. 
