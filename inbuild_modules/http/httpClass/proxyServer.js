@@ -19,9 +19,7 @@ proxy.on('connect', (req, clientSocket, head) => {
   // Connect to the destination server (origin server)
   const serverSocket = connect(port || 80, hostname, () => {
     // Send HTTP response to the client to confirm the tunnel connection
-    clientSocket.write('HTTP/1.1 200 Connection Established\r\n' +
-                    'Proxy-agent: Node.js-Proxy\r\n' +
-                    '\r\n');
+    clientSocket.write('HTTP/1.1 200 Connection Established\r\n' +'Proxy-agent: Node.js-Proxy\r\n' +'\r\n');
     
     // Send any remaining request data (head) to the destination server
     serverSocket.write(head);
