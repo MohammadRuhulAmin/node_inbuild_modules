@@ -330,5 +330,10 @@ In Node.js, streaming is commonly preferred for tasks like serving files over HT
 5. End-to-end Headers:
 6. Hop-by-hop Headers:
 
+## http.METHODS:
 
+console.log(http.METHODS)
 
+1. ACL (Access Control List): is a set of rules used to control access to resources by specifing which users or
+system processes have permissions to access certain objects.
+2. 
