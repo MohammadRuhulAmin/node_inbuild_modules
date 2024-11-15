@@ -34,12 +34,12 @@ proxy.on('connect', (req, clientSocket, head) => {
 proxy.listen(1337, '127.0.0.1', () => {
   // Once the proxy server is running, create a client request to the proxy
   
-  // Specify the request options to initiate a CONNECT request
+  // Specify the request options to initiate a CONNECT request between proxy server and the destination server
   const options = {
     port: 1337,        // Proxy server port
     host: '127.0.0.1', // Proxy server host
-    method: 'CONNECT', // HTTP CONNECT method for tunneling
-    path: 'www.google.com:80', // Destination server path for tunneling
+    method: 'CONNECT', // HTTP CONNECT method for tunneling between proxy server and destination server
+    path: 'www.google.com:80', // The destination  trying to reach via the proxy
   };
 
   // Send a CONNECT request to the proxy server
