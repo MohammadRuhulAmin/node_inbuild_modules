@@ -26,7 +26,7 @@ const options = {
 
 const agent = new httpAgentManager(options)
 
-agent.on('response',(res)=>{console.log(res.statusCode)})
+agent.on('response',(res)=>{console.log("status code:",res.statusCode)})
 
 agent.agentPerformer()
      .then(data =>{console.log(data)})

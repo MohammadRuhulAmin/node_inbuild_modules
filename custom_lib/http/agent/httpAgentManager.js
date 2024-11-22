@@ -25,7 +25,7 @@ class httpAgentManager{
             for(const[event,handler] of Object.entries(this.eventHandlers)){
                 req.on(event,handler)
             }
-
+            req.cork() 
             req.on('socket',(socket)=>{socket.emit('agentRemove')})
             req.on('connect',()=>{resolve('socket connected....')})
             req.on('error',(err)=>{reject(err.message)})
@@ -35,6 +35,7 @@ class httpAgentManager{
             req.on('upgrade',(res,socket,head)=>{console.log('upgrade')}) /** advanced topic for socket */
             req.on('timeout',()=>{console.error('Request Timed out');
                 req.destroy(new Error('Request Timeout'))})
+            req.uncork()
             req.end()
         })
     }    
