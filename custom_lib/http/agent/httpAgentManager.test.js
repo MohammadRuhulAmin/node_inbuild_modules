@@ -17,8 +17,6 @@ async function responseMatching() {
         mockServer.listen(8000);
         const options = { hostname: 'localhost', port: 8000, path: '/', method: 'GET' };
         const responseData = await new httpAgentManager(options).agentPerformer();
-
-        // Parse the JSON string from the response and compare it with mockData
         assert.deepStrictEqual(JSON.parse(responseData), mockData, 'Err msg: Expected data does not match');
         console.log("Test 1: Successful Response - Passed");
     } catch (err) {

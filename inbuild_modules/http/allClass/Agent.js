@@ -24,6 +24,7 @@ class HttpAgentManager{
             }).on('error',(err)=>{
                 reject(new Error(`${err.message}`))
             })
+            console.log(req.getHeader())
             req.end()
         })
         

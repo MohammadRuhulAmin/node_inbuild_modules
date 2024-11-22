@@ -1,6 +1,6 @@
 import httpAgentManager from "./httpAgentManager.js"
-
 import {Agent} from "node:http"
+
 const agentCred = {
     keepAlive:true,
     keepAliveMscs:2000,
@@ -10,18 +10,24 @@ const agentCred = {
     schedule:'lifo'
 }
 
+
 const options = {
     host:'jsonplaceholder.typicode.com',
     port:80,
     method:'GET',
     path:'/todos',
-    agent: new Agent(agentCred)
+    agent: new Agent(agentCred),
+    headers:{
+        'username':'ruhul amin',
+        'password':'12!ruhul'
+    }
 }
-
 
 const agent = new httpAgentManager(options)
 agent.agentPerformer()
-     .then(data =>{console.log(data.toString())})
+     .then(data =>{console.log(data)})
      .catch(err=>{console.log(err.message)})
-     .finally(()=>{process.exit(1)})
+     .finally(()=>{
+        process.exit(0)
+     })
 
