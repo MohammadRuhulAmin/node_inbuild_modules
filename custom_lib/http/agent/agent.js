@@ -15,9 +15,10 @@ const options = {
     host:'jsonplaceholder.typicode.com',
     port:80,
     method:'GET',
-    path:'/todos',
+    path:'/todos/1',
     agent: new Agent(agentCred),
     headers:{
+        'Expect':'100-continue',
         'username':'ruhul amin',
         'password':'12!ruhul'
     }
@@ -30,4 +31,3 @@ agent.agentPerformer()
      .finally(()=>{
         process.exit(0)
      })
-

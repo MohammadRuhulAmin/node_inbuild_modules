@@ -11,23 +11,24 @@ class httpAgentManager{
     agentPerformer(){
         return new Promise((resolve,reject)=>{
             const options = {...this.options,headers:this.headers}
-            console.log(options)
-            request(options,(res)=>{
+            const req = request(options,(res)=>{
                 let data = ''
                 res.on('data',(chunk)=>{data += chunk})
-                res.on('error',(err)=>{reject(err)}) 
+                res.on('error',(err)=>{reject(err.message)}) 
                 res.on('end',()=>{resolve(data)})
-            }).on('socket',(socket)=>{
-                socket.on('connect',()=>{resolve('socket connected!')})
-                socket.emit('agentRemove')
-            }).on('error',(err)=>{reject(err)})
-            .on('error',(err)=>{
-                reject(err.message)
-            }).on('close',()=>{resolve('Socket closed')})
-            .end()
+            })
+            req.on('socket',(socket)=>{socket.emit('agentRemove')})
+            req.on('connect',()=>{resolve('socket connected....')})
+            req.on('error',(err)=>{reject(err.message)})
+            req.on('close',()=>{resolve('Socket closed')})
+            req.on('finish',()=>{console.log("request finish")})
+            req.on('information',(info)=>{console.log(info)})
+            req.on('upgrade',()=>{console.log('upgrade')})
+            req.on('timeout',()=>{console.error('Request Timed out');
+                req.destroy(new Error('Request Timeout'))})
+            req.end()
         })
-    }
-    
+    }    
 }
 
 export default httpAgentManager;
