@@ -21,7 +21,7 @@ const options = {
 
 const agent = new httpAgentManager(options)
 agent.agentPerformer()
-     .then(data =>{console.log(data)})
+     .then(data =>{console.log(data.toString())})
      .catch(err=>{console.log(err.message)})
      .finally(()=>{process.exit(1)})
 
