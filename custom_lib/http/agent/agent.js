@@ -25,9 +25,13 @@ const options = {
 }
 
 const agent = new httpAgentManager(options)
+
+agent.on('response',(res)=>{console.log(res.statusCode)})
+
 agent.agentPerformer()
      .then(data =>{console.log(data)})
      .catch(err=>{console.log(err.message)})
      .finally(()=>{
         process.exit(0)
      })
+
