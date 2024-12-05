@@ -3,6 +3,8 @@ let socketId = 0
 const socketServer = net.createServer()
 socketServer.maxConnections = 6;
 socketServer.on('connection',(socket)=>{
+    console.log('socket: ')
+    console.log(socket)
     console.log('new Client connected')
     socket.write('Hi Client!')
     socket.on('data',(data)=>{console.log(data.toString())})
@@ -11,7 +13,8 @@ socketServer.on('connection',(socket)=>{
         console.log('socket is distroying')
         socket.destroy()
     })
-
+    setTimeout(()=>socket.resume(),3000) // resume the stream after 3 seconds
+    setTimeout(()=>socket.pause(),3000) // pause the stream after 3 seconds
     socket.on('lookup',()=>{console.log('waking up!')})
     socket.on('error',(err)=>{console.error(err.message)})
     socket.on('close',()=>console.log('When the socket Connection fully closed'))
